@@ -20,6 +20,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsKey(K key) {
+		int capacity = this.table.size();
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
@@ -56,6 +57,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V get(K key) {
+		int capacity = this.table.size();
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
@@ -92,6 +94,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V remove(K key) {
+		int capacity = this.table.size();
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
@@ -116,6 +119,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	}
 	
 	private int hash(K key) {
+		int capacity = this.table.size();
 		int hashCode = key.hashCode();
 		int hashIndex = Math.abs(hashCode) % capacity;
 		return hashIndex;
