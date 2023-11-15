@@ -1,19 +1,30 @@
 package assign09;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HashTable<K, V> implements Map<K, V> {
-	private MapEntry
+	private ArrayList<MapEntry<K, V>> table;
+	private int capacity;
+	
+	
+	public HashTable(){
+		int capacity = 10;
+		table = new ArrayList<MapEntry<K, V>>();
+		for(int i = 0; i < capacity; i++)
+		   table.add(null);
+	}
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < capacity; i++) {
+			table.set(i, null);
+		}
 	}
 
 	@Override
 	public boolean containsKey(K key) {
-		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
