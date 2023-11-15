@@ -9,7 +9,7 @@ package assign09;
 public class StudentHashDemo {
 
 	public static void main(String[] args) {
-		
+
 		StudentBadHash alan = new StudentBadHash(1019999, "Alan", "Turing");
 		StudentBadHash ada = new StudentBadHash(1004203, "Ada", "Lovelace");
 		StudentBadHash edsger = new StudentBadHash(1010661, "Edsger", "Dijkstra");
@@ -20,8 +20,8 @@ public class StudentHashDemo {
 		studentGpaTable.put(ada, 3.5);
 		studentGpaTable.put(edsger, 3.8);
 		studentGpaTable.put(grace, 4.0);
-		
-		for(MapEntry<StudentBadHash, Double> e : studentGpaTable.entries())
+
+		for (MapEntry<StudentBadHash, Double> e : studentGpaTable.entries())
 			System.out.println("Student " + e.getKey() + " has GPA " + e.getValue() + ".");
 	}
 }

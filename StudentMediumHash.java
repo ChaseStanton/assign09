@@ -2,6 +2,15 @@ package assign09;
 
 import java.text.DecimalFormat;
 
+/**
+ * This class provides a simple representation for a University of Utah student.
+ * Object's hashCode method is overridden with a correct hash function for this
+ * object, but one that does a okay job of distributing students in a hash
+ * table.
+ * 
+ * @author Prof. Parker and Reece Kalmar, Chase Stanton
+ * @version 11/15/2023
+ */
 public class StudentMediumHash {
 	private int uid;
 	private String firstName;

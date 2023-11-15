@@ -19,7 +19,6 @@ public class HashTable<K, V> implements Map<K, V> {
 	private int items;
 	private int capacity;
 
-	// MAKE SURE LOAD FACTOR IS LESS THAN .5
 
 	/**
 	 * Constructs an empty hash table with a default capacity of 11.

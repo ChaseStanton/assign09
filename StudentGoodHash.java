@@ -2,6 +2,15 @@ package assign09;
 
 import java.text.DecimalFormat;
 
+/**
+ * This class provides a simple representation for a University of Utah student.
+ * Object's hashCode method is overridden with a correct hash function for this
+ * object, but one that does a good job of distributing students in a hash
+ * table.
+ * 
+ * @author Prof. Parker and Reece Kalmar, Chase Stanton
+ * @version 11/15/2023
+ */
 public class StudentGoodHash {
 	private int uid;
 	private String firstName;
@@ -30,11 +39,11 @@ public class StudentGoodHash {
 	/**
 	 * @return the first name for this student object
 	 */
-	
+
 	public String getFirstName() {
 		return this.firstName;
 	}
- 
+
 	/**
 	 * @return the last name for this student object
 	 */
@@ -43,18 +52,19 @@ public class StudentGoodHash {
 	}
 
 	/**
-	 * @return true if this student and 'other' have the same UID, first name, and last name; false otherwise
+	 * @return true if this student and 'other' have the same UID, first name, and
+	 *         last name; false otherwise
 	 */
 	public boolean equals(Object other) {
 		// change to StudentMediumHash and StudentGoodHash for two new classes
-		if(!(other instanceof StudentBadHash))
+		if (!(other instanceof StudentBadHash))
 			return false;
 
 		StudentGoodHash rhs = (StudentGoodHash) other;
 
 		return this.uid == rhs.uid && this.firstName.equals(rhs.firstName) && this.lastName.equals(rhs.lastName);
 	}
-	
+
 	/**
 	 * @return a textual representation of this student
 	 */
