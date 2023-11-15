@@ -21,19 +21,10 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsKey(K key) {
-		int index = hash(key);
-		int startingIndex = index;
-		int i = 1;
-
-		while (table.get(index) != null) {
-			if (table.get(index).getKey().equals(key))
-				return true;
-			index = (startingIndex + i * i) % capacity;
-			i++;
-			if (startingIndex == index)
-				break;
+		if(this.table.get(hash(key)) == null){
+			return false;
 		}
-		return false;
+		return this.table.get(hash(key)).getKey().equals(key);
 	}
 
 	@Override
@@ -79,6 +70,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
+		this.items++;
 		int index = hash(key);
 		while(index >= table.size())
 			table.add(null);
