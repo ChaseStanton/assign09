@@ -12,7 +12,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	public HashTable(){
 		this.table = new ArrayList<MapEntry<K, V>>(capacity);
 	}
-	
+
 	@Override
 	public void clear() {
 		this.items = 0;
@@ -24,13 +24,13 @@ public class HashTable<K, V> implements Map<K, V> {
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
-		
-		while(table.get(index) != null) {
-			if(table.get(index).getKey().equals(key))
+
+		while (table.get(index) != null) {
+			if (table.get(index).getKey().equals(key))
 				return true;
 			index = (startingIndex + i * i) % capacity;
 			i++;
-			if(startingIndex == index)
+			if (startingIndex == index)
 				break;
 		}
 		return false;
@@ -38,8 +38,8 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsValue(V value) {
-		for(MapEntry<K, V> entry : this.table) {
-			if(entry.getValue().equals(value))
+		for (MapEntry<K, V> entry : this.table) {
+			if (entry.getValue().equals(value))
 				return true;
 		}
 		return false;
@@ -48,8 +48,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public List<MapEntry<K, V>> entries() {
 		List<MapEntry<K, V>> list = new ArrayList<>();
-		for(MapEntry<K, V> entry : this.table) {
-			if(entry != null)
+		for (MapEntry<K, V> entry : this.table) {
+			if (entry != null)
 				list.add(entry);
 		}
 		return list;
@@ -60,13 +60,13 @@ public class HashTable<K, V> implements Map<K, V> {
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
-		
-		while(table.get(index) != null) {
-			if(table.get(index).getKey().equals(key))
+
+		while (table.get(index) != null) {
+			if (table.get(index).getKey().equals(key))
 				return table.get(index).getValue();
 			index = (startingIndex + i * i) % capacity;
 			i++;
-			if(startingIndex == index)
+			if (startingIndex == index)
 				break;
 		}
 		return null;
@@ -117,7 +117,7 @@ public class HashTable<K, V> implements Map<K, V> {
 			}
 			index = (startingIndex + i * i) % capacity;
 			i++;
-			if(index == startingIndex)
+			if (index == startingIndex)
 				break;
 		}
 		return null;
@@ -127,12 +127,11 @@ public class HashTable<K, V> implements Map<K, V> {
 	public int size() {
 		return this.items;
 	}
-	
+
 	private int hash(K key) {
 		int hashCode = key.hashCode();
 		int hashIndex = Math.abs(hashCode) % capacity;
 		return hashIndex;
 	}
-	
 
 }
