@@ -5,18 +5,15 @@ import java.util.List;
 
 public class HashTable<K, V> implements Map<K, V> {
 	private ArrayList<MapEntry<K, V>> table;
-	private int capacity;
 	private int items;
 	
 	
 	public HashTable(){
-		this.capacity = 7;
 		this.table = new ArrayList<MapEntry<K, V>>(7);
 	}
 	
 	@Override
 	public void clear() {
-		this.capacity = 7;
 		this.items = 0;
 		this.table = new ArrayList<MapEntry<K, V>>(7);
 	}
@@ -40,8 +37,8 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsValue(V value) {
-		for(MapEntry<K, V> entry : table) {
-			if(entry != null && entry.getValue().equals(value))
+		for(MapEntry<K, V> entry : this.table) {
+			if(entry.getValue().equals(value))
 				return true;
 		}
 		return false;
@@ -49,8 +46,8 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public List<MapEntry<K, V>> entries() {
-		List<MapEntry<K, V>> list = null;
-		for(MapEntry<K, V> entry : table) {
+		List<MapEntry<K, V>> list = new ArrayList<>();
+		for(MapEntry<K, V> entry : this.table) {
 			if(entry != null)
 				list.add(entry);
 		}
@@ -76,15 +73,21 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean isEmpty() {
-		if(items == 0)
-			return true;
-		return false;
+		return this.table.isEmpty();
 	}
 
 	@Override
 	public V put(K key, V value) {
-		// TODO Auto-generated method stub
-		return null;
+		this.items += 1;
+		V replacedValue;
+		int hashIndex = hash(key);
+		if(this.table.get(hashIndex) != null){
+			replacedValue = this.table.get(hashIndex).getValue();
+			this.table.set(hashIndex, new MapEntry<K,V>(key, value));
+			return replacedValue;
+		}
+		this.table.set(hashIndex, new MapEntry<K,V>(key, value));
+			return null;
 	}
 
 	@Override
@@ -109,8 +112,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.items;
 	}
 	
 	private int hash(K key) {
