@@ -3,7 +3,7 @@ package assign09;
 /**
  * This class demonstrates how to use a hash table to store key-value pairs.
  * 
- * @author Prof. Parker
+ * @author Prof. Parkers
  * @version November 2, 2023
  */
 public class StudentHashDemo {
