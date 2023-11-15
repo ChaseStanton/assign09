@@ -6,7 +6,7 @@ import java.util.List;
 public class HashTable<K, V> implements Map<K, V> {
 	private ArrayList<MapEntry<K, V>> table;
 	private int items;
-	private int capacity = 7;
+	private int capacity = 11;
 
 	//MAKE SURE LOAD FACTOR IS LESS THAN .5
 
