@@ -7,9 +7,10 @@ public class HashTable<K, V> implements Map<K, V> {
 	private ArrayList<MapEntry<K, V>> table;
 	private int items;
 	private int capacity = 7;
-	
-	
-	public HashTable(){
+
+	//MAKE SURE LOAD FACTOR IS LESS THAN .5
+
+	public HashTable() {
 		this.table = new ArrayList<MapEntry<K, V>>(capacity);
 	}
 
@@ -21,26 +22,19 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsKey(K key) {
-		int index = hash(key);
-		int startingIndex = index;
-		int i = 1;
-
-		while (table.get(index) != null) {
-			if (table.get(index).getKey().equals(key))
-				return true;
-			index = (startingIndex + i * i) % capacity;
-			i++;
-			if (startingIndex == index)
-				break;
+		if (this.table.get(hash(key)) == null) {
+			return false;
 		}
-		return false;
+		return this.table.get(hash(key)).getKey().equals(key);
 	}
 
 	@Override
 	public boolean containsValue(V value) {
 		for (MapEntry<K, V> entry : this.table) {
-			if (entry.getValue().equals(value))
-				return true;
+			if (entry != null) {
+				if (entry.getValue().equals(value))
+					return true;
+			}
 		}
 		return false;
 	}
@@ -80,11 +74,12 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public V put(K key, V value) {
 		resize();
+		this.items++;
 		int index = hash(key);
-		while(index >= table.size())
+		while (index >= table.size())
 			table.add(null);
-	    int startingIndex = index;
-	    int i = 1;
+		int startingIndex = index;
+		int i = 1;
 
 	    while (table.get(index) != null) {
 	        if (table.get(index).getKey().equals(key)) {
@@ -97,10 +92,10 @@ public class HashTable<K, V> implements Map<K, V> {
 	        if (index == startingIndex) {
 	            break;
 	        }
-	    }
+		}
 
-	    table.set(index, new MapEntry<>(key, value)); 
-	    return null;
+		table.set(index, new MapEntry<>(key, value));
+		return null;
 	}
 
 	@Override
