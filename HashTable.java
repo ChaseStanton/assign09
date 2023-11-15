@@ -17,14 +17,23 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public void clear() {
 		this.capacity = 7;
+		this.items = 0;
 		this.table = new ArrayList<MapEntry<K, V>>(7);
 	}
 
 	@Override
 	public boolean containsKey(K key) {
-		for(MapEntry<K, V> entry : table) {
-			if(entry != null && entry.getKey().equals(key))
+		int index = hash(key);
+		int startingIndex = index;
+		int i = 1;
+		
+		while(table.get(index) != null) {
+			if(table.get(index).getKey().equals(key))
 				return true;
+			index = (startingIndex + i * i) % capacity;
+			i++;
+			if(startingIndex == index)
+				break;
 		}
 		return false;
 	}
@@ -67,7 +76,8 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if(items == 0)
+			return true;
 		return false;
 	}
 
@@ -79,7 +89,21 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V remove(K key) {
-		// TODO Auto-generated method stub
+		int index = hash(key);
+		int startingIndex = index;
+		int i = 1;
+		while(table.get(index) == null) {
+			if(table.get(index).getKey().equals(key)) {
+				V value = table.get(index).getValue();
+				table.set(index, null);
+				this.items--;
+				return value;
+			}
+			index = (startingIndex + i * i) % capacity;
+			i++;
+			if(index == startingIndex)
+				break;
+		}
 		return null;
 	}
 
