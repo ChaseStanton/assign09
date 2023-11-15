@@ -116,7 +116,7 @@ public class HashTable<K, V> implements Map<K, V> {
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
-		while(index < table.size() && table.get(index) != null) {
+		while(table.get(index) != null) {
 			if(table.get(index).getKey().equals(key)) {
 				V value = table.get(index).getValue();
 				table.set(index, null);
@@ -152,10 +152,11 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	            for (MapEntry<K, V> entry : table) {
 	                if (entry != null) {
-	                    int newIndex = rehash(entry.getKey(), newCapacity);
+	                    int oldIndex = rehash(entry.getKey(), newCapacity);
+	                    int newIndex = oldIndex;
 	                    int i = 1;
 	                    while (newTable.get(newIndex) != null) {
-	                        newIndex = (newIndex + i * i) % newCapacity;
+	                        newIndex = (oldIndex + i * i) % newCapacity;
 	                        i++;
 	                    }
 	                    newTable.set(newIndex, entry);
