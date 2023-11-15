@@ -16,8 +16,7 @@ private HashTable<String, Integer> table;
 
 	@Test
 	void testRemove() {
-		table.remove("hello");
-		assertEquals(3, "hello");
+		assertEquals(3, table.remove("hello"));
 	}
 
 }
