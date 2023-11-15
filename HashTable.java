@@ -6,10 +6,11 @@ import java.util.List;
 public class HashTable<K, V> implements Map<K, V> {
 	private ArrayList<MapEntry<K, V>> table;
 	private int capacity;
+	private int items;
 	
 	
 	public HashTable(){
-		int capacity = 10;
+		int capacity = 11;
 		table = new ArrayList<MapEntry<K, V>>();
 		for(int i = 0; i < capacity; i++)
 		   table.add(null);
@@ -24,12 +25,19 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsKey(K key) {
-		
+		for(MapEntry<K, V> entry : table) {
+			if(entry != null && entry.getKey().equals(key))
+				return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean containsValue(V value) {
-		// TODO Auto-generated method stub
+		for(MapEntry<K, V> entry : table) {
+			if(entry != null && entry.getValue().equals(value))
+				return true;
+		}
 		return false;
 	}
 
