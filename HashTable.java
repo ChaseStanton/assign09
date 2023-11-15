@@ -1,9 +1,13 @@
 package assign09;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class HashTable<K, V> implements Map<K, V> {
-	private MapEntry
+	private ArrayList<MapEntry<K, V>> quadraticTable;
+	private ArrayList<LinkedList<MapEntry<K, V>>> seperateTable;
+
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
