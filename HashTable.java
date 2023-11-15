@@ -7,9 +7,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	private ArrayList<MapEntry<K, V>> table;
 	private int items;
 	private int capacity = 7;
-	
-	
-	public HashTable(){
+
+	public HashTable() {
 		this.table = new ArrayList<MapEntry<K, V>>(capacity);
 	}
 
@@ -21,7 +20,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean containsKey(K key) {
-		if(this.table.get(hash(key)) == null){
+		if (this.table.get(hash(key)) == null) {
 			return false;
 		}
 		return this.table.get(hash(key)).getKey().equals(key);
@@ -30,8 +29,10 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public boolean containsValue(V value) {
 		for (MapEntry<K, V> entry : this.table) {
-			if (entry.getValue().equals(value))
-				return true;
+			if (entry != null) {
+				if (entry.getValue().equals(value))
+					return true;
+			}
 		}
 		return false;
 	}
@@ -72,27 +73,27 @@ public class HashTable<K, V> implements Map<K, V> {
 	public V put(K key, V value) {
 		this.items++;
 		int index = hash(key);
-		while(index >= table.size())
+		while (index >= table.size())
 			table.add(null);
-	    int startingIndex = index;
-	    int i = 1;
+		int startingIndex = index;
+		int i = 1;
 
-	    while (table.get(index) != null) {
-	        if (table.get(index).getKey().equals(key)) {
-	            V previousValue = table.get(index).getValue();
-	            table.get(index).setValue(value); 
-	            return previousValue;
-	        }
-	        index = (startingIndex + i * i) % capacity; 
-	        i++; 
-	        if (index == startingIndex) {
-	        	capacity *= 2;
-	            break;
-	        }
-	    }
+		while (table.get(index) != null) {
+			if (table.get(index).getKey().equals(key)) {
+				V previousValue = table.get(index).getValue();
+				table.get(index).setValue(value);
+				return previousValue;
+			}
+			index = (startingIndex + i * i) % capacity;
+			i++;
+			if (index == startingIndex) {
+				capacity *= 2;
+				break;
+			}
+		}
 
-	    table.set(index, new MapEntry<>(key, value)); 
-	    return null;
+		table.set(index, new MapEntry<>(key, value));
+		return null;
 	}
 
 	@Override
@@ -100,8 +101,8 @@ public class HashTable<K, V> implements Map<K, V> {
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
-		while(index >= table.size() || table.get(index) != null) {
-			if(table.get(index) != null && table.get(index).getKey().equals(key)) {
+		while (index >= table.size() || table.get(index) != null) {
+			if (table.get(index) != null && table.get(index).getKey().equals(key)) {
 				V value = table.get(index).getValue();
 				table.set(index, null);
 				this.items--;
