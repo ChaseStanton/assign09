@@ -79,6 +79,7 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
+		resize();
 		int index = hash(key);
 		while(index >= table.size())
 			table.add(null);
@@ -87,14 +88,13 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	    while (table.get(index) != null) {
 	        if (table.get(index).getKey().equals(key)) {
-	            V previousValue = table.get(index).getValue();
+	            V Value = table.get(index).getValue();
 	            table.get(index).setValue(value); 
-	            return previousValue;
+	            return Value;
 	        }
 	        index = (startingIndex + i * i) % capacity; 
 	        i++; 
 	        if (index == startingIndex) {
-	        	capacity *= 2;
 	            break;
 	        }
 	    }
@@ -108,8 +108,8 @@ public class HashTable<K, V> implements Map<K, V> {
 		int index = hash(key);
 		int startingIndex = index;
 		int i = 1;
-		while(index >= table.size() || table.get(index) != null) {
-			if(table.get(index) != null && table.get(index).getKey().equals(key)) {
+		while(index < table.size() && table.get(index) != null) {
+			if(table.get(index).getKey().equals(key)) {
 				V value = table.get(index).getValue();
 				table.set(index, null);
 				this.items--;
@@ -133,5 +133,43 @@ public class HashTable<K, V> implements Map<K, V> {
 		int hashIndex = Math.abs(hashCode) % capacity;
 		return hashIndex;
 	}
+	private void resize() {
+		double loadFactor = (double) items / capacity;
+		if (loadFactor >= 0.5) {
+            int newCapacity = nextPrime(capacity * 2);
+            ArrayList<MapEntry<K, V>> newTable = new ArrayList<>(newCapacity);
+
+            // Rehash all existing entries into the new table with the new capacity
+            for (MapEntry<K, V> entry : table) {
+                if (entry != null) {
+                    int newIndex = hash(entry.getKey());
+                    while (newIndex >= newCapacity) {
+                        newIndex -= newCapacity;
+                    }
+                    newTable.add(newIndex, entry);
+                }
+            }
+
+            table = newTable;
+            capacity = newCapacity;
+        }
+	}
+	private boolean isPrime(int num) {
+		if(num <= 1)
+			return false;
+		for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+	}
+		return true;
+	}
+	private int nextPrime(int num) {
+		while(!isPrime(num)) {
+			num++;
+		}
+		return num;
+	}
+	
 
 }
