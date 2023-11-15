@@ -8,6 +8,8 @@ public class HashTable<K, V> implements Map<K, V> {
 	private int items;
 	private int capacity = 7;
 
+	//MAKE SURE LOAD FACTOR IS LESS THAN .5
+
 	public HashTable() {
 		this.table = new ArrayList<MapEntry<K, V>>(capacity);
 	}
