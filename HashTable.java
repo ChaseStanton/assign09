@@ -38,7 +38,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	        index = (startingIndex + i * i) % capacity;
 	        i++;
 	        if (index == startingIndex) {
-	            break; 
+	           break; 
 	        }
 	    }
 	    return false; 
@@ -90,8 +90,6 @@ public class HashTable<K, V> implements Map<K, V> {
 	@Override
 	public V put(K key, V value) {
 		int index = hash(key);
-		while (index >= table.size())
-			table.add(null);
 		int startingIndex = index;
 		int i = 1;
 

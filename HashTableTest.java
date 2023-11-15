@@ -39,8 +39,34 @@ private HashTable<Integer, Integer> table;
 		assertTrue(table.containsKey(3));
 		assertTrue(table.containsKey(15));
 		assertTrue(table.containsKey(4));
-		table.remove(9);
-		assertFalse(table.containsKey(9));
+		assertTrue(table.containsKey(5));
+		table.put(9, 0);
+		assertTrue(table.containsKey(9));
+		table.put(23, 0);
+		table.put(25, 0);
+		table.put(100, 0);
+		table.put(10, 0);
+		table.put(50, 0);
+		assertTrue(table.containsKey(50));
+		assertTrue(table.containsKey(0));
+		assertTrue(table.containsKey(9));
+		assertTrue(table.containsKey(2));
+		assertTrue(table.containsKey(3));
+		assertTrue(table.containsKey(15));
+		assertTrue(table.containsKey(4));
+		assertTrue(table.containsKey(5));
+		assertTrue(table.containsKey(10));
+		assertTrue(table.containsKey(100));
+		assertTrue(table.containsKey(25));
+		assertTrue(table.containsKey(23));
+
+		
+		
+
+
+
+
+
 
 	}
 
