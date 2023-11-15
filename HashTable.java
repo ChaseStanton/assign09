@@ -10,17 +10,14 @@ public class HashTable<K, V> implements Map<K, V> {
 	
 	
 	public HashTable(){
-		int capacity = 11;
-		table = new ArrayList<MapEntry<K, V>>();
-		for(int i = 0; i < capacity; i++)
-		   table.add(null);
+		this.capacity = 7;
+		this.table = new ArrayList<MapEntry<K, V>>(7);
 	}
+	
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		for(int i = 0; i < capacity; i++) {
-			table.set(i, null);
-		}
+		this.capacity = 7;
+		this.table = new ArrayList<MapEntry<K, V>>(7);
 	}
 
 	@Override
