@@ -43,13 +43,28 @@ public class HashTable<K, V> implements Map<K, V> {
 
 	@Override
 	public List<MapEntry<K, V>> entries() {
-		// TODO Auto-generated method stub
-		return null;
+		List<MapEntry<K, V>> list = null;
+		for(MapEntry<K, V> entry : table) {
+			if(entry != null)
+				list.add(entry);
+		}
+		return list;
 	}
 
 	@Override
 	public V get(K key) {
-		// TODO Auto-generated method stub
+		int index = hash(key);
+		int startingIndex = index;
+		int i = 1;
+		
+		while(table.get(index) != null) {
+			if(table.get(index).getKey().equals(key))
+				return table.get(index).getValue();
+			index = (startingIndex + i * i) % capacity;
+			i++;
+			if(startingIndex == index)
+				break;
+		}
 		return null;
 	}
 
@@ -75,6 +90,12 @@ public class HashTable<K, V> implements Map<K, V> {
 	public int size() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	private int hash(K key) {
+		int hashCode = key.hashCode();
+		int hashIndex = Math.abs(hashCode) % capacity;
+		return hashIndex;
 	}
 	
 
