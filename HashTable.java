@@ -37,7 +37,11 @@ public class HashTable<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public void clear() {
-		this.table = new ArrayList<MapEntry<K, V>>(capacity);
+		table = new ArrayList<MapEntry<K, V>>();
+		for (int i = 0; i < capacity; i++) {
+			table.add(null);
+		}
+		this.items = 0;
 
 	}
 
@@ -130,7 +134,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return this.table.isEmpty();
+		return this.items == 0;
 	}
 
 	/**

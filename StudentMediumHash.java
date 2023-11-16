@@ -73,6 +73,11 @@ public class StudentMediumHash {
 	}
 
 	public int hashCode() {
-		return this.firstName.length() + this.lastName.length();
+		int hashVal = 0;
+		String str = this.firstName + this.lastName;
+		for(int i = 0; i < str.length(); i++) {
+			hashVal = hashVal + str.charAt(i);
+		}
+		return hashVal;
 	}
 }
