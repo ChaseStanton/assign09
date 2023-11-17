@@ -18,6 +18,7 @@ public class HashTable<K, V> implements Map<K, V> {
 	private ArrayList<MapEntry<K, V>> table;
 	private int items;
 	private int capacity;
+	int collisions;
 
 
 	/**
@@ -162,6 +163,7 @@ public class HashTable<K, V> implements Map<K, V> {
 			if (index == startingIndex) {
 				break;
 			}
+			collisions++;
 		}
 		table.set(index, new MapEntry<>(key, value));
 		this.items++;
